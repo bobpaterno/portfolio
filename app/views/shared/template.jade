@@ -2,11 +2,62 @@ doctype html
 html
   head
     meta(charset='utf-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1.0')
+
     title= title
     link(href='/css/normalize.css', rel='stylesheet')
     link(href='/css/buttons.css', rel='stylesheet')
+    link(href='/css/bootstrap-theme-min.css', rel='stylesheet')
+    link(href='/css/bootstrap.min.css', rel='stylesheet')
+    link(href='/css/style.css', rel='stylesheet')
     link(href='/less/app.css', rel='stylesheet')
+    link(rel='apple-touch-icon-precomposed' sizes='144x144' href='img/apple-touch-icon-144-precomposed.png')
+    link(rel='apple-touch-icon-precomposed' sizes='114x114' href='img/apple-touch-icon-114-precomposed.png')
+    link(rel='apple-touch-icon-precomposed' sizes='72x72' href='img/apple-touch-icon-72-precomposed.png')
+    link(rel='apple-touch-icon-precomposed' href='img/apple-touch-icon-57-precomposed.png')
+    link(rel='shortcut icon' href='img/favicon.png')
+
   body
+  .container
+    .row.clearfix
+      .col-md-12.column
+        ul.nav.nav-tabs
+          li
+            a(href='/') Home
+          if(user)
+            li.dropdown
+              a.dropdown-toggle(href='#' data-toggle='dropdown') Work
+                strong.caret
+              ul.dropdown-menu
+                li: a(href='/portfolios') Projects
+                li: a(href='/portfolios/new') Add Project
+          else
+            li: a(href='/portfolios') Portfolio
+          li.dropdown.pull-right
+            a.dropdown-toggle(href='#' data-toggle='dropdown') About
+              strong.caret
+            ul.dropdown-menu
+              li: a(href='/about') Bio
+              li: a(href='/resume') Resume
+              li: a(href='/contact') Contact
+              if(user)
+                li.divider
+                li: a(href='/logout') Logout
+
+    //- .navbar
+    //-   if(user)
+    //-     span Logout
+    //-        a(href='/logout') #{user.email}
+    //-   span: a(href='/') Home
+    //-   span: a(href='/about') About
+    //-   span
+    //-     a(href='/contact') Contact
+    //-   span
+    //-     a(href='/resume') Resume
+    //-   span: a(href='/portfolios') Portfolios
+    //-   if(user)
+    //-     span: a(href='/portfolios/new') New Portfolio
+
     block content
 
     script(src='/js/vendor/jquery-2.1.1.js')
@@ -14,6 +65,9 @@ html
     script(src='/js/vendor/moment-2.6.0.js')
     script(src='/js/vendor/buttons.js')
     script(src='/js/vendor/traceur.js')
+    script(src='/js/vendor/bootstrap.min.js')
+    script(src='/js/vendor/html5shiv.js')
+    //- script(src='/js/vendor/
     script(src='/socket.io/socket.io.js')
     script(src='/js/es5/main.js')
     script(src='/js/es6/compiled/main.js')
