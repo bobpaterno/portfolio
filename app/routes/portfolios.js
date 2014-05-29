@@ -5,8 +5,9 @@ var traceur = require('traceur');
 var Portfolio = traceur.require(__dirname+'/../models/portfolio.js');
 
 exports.index = (req, res)=>{
-  // Portfolio.findAll();
-  res.render('portfolios/index', {title: 'Portfolio Index'});
+  Portfolio.findAll(portfolios=>{
+    res.render('portfolios/index', {projects:portfolios, title: 'Portfolio Index'});
+  });
 };
 
 exports.new = (req, res)=>{
@@ -24,7 +25,15 @@ exports.create = (req, res)=>{
 };
 
 exports.show = (req, res)=>{
-  // Portfolio.findById(req.params.id, portfolio=>{
-  //   res.render('portfolios/show', {portfolio:portfolio, title:'Portfolio Show'});
-  // });
+  Portfolio.findById(req.params.id, portfolio=>{
+    res.render('portfolios/show', {project:portfolio, title:'Portfolio Show'});
+  });
+};
+
+exports.destroy = (req, res)=>{
+  Portfolio.destroyById(req.params.id, ()=>{
+    res.redirect('/portfolios');
+  });
+
+  // var _id = Mongo.ObjectID(req.params.id);
 };

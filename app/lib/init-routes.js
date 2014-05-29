@@ -32,6 +32,7 @@ function load(app, fn){
   app.post('/portfolios', dbg, portfolios.create);
   app.get('/portfolios/new', dbg, portfolios.new);
   app.get('/portfolios/:id', dbg, portfolios.show);
+  app.delete('/portfolios/:id', dbg, portfolios.destroy);
 
   console.log('Routes Loaded');
   fn();

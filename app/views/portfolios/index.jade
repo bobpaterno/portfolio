@@ -2,3 +2,16 @@ extends ../shared/template
 
 block content
   h1 Portfolio Index
+  each p in projects
+    form(action='/portfolios/#{p._id.toString()}' method='post')
+      .project-link Title:
+        a(href='/portfolios/#{p._id.toString()}') #{p.title}
+        span (#{p.date.toDateString()})
+        input(type='hidden' name='_method' value='DELETE')
+        button x
+
+
+            //- td
+            //-   form.task(method='POST' action='/tasks/#{t._id}')
+            //-     input(type='hidden' name='_method' value='PUT')
+            //-     input(type='checkbox' checked=t.isComplete)

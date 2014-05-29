@@ -1,0 +1,10 @@
+extends ../shared/template
+
+block content
+  h1 Project Description
+  .project
+    .title Title: #{project.title} (#{project.date.toDateString()})
+    .desc Description: #{project.description}
+    .repo: a(href='#{project.git}') GitHub Repo
+    .pjturl: a(href='http://#{project.app}') Project URL
+    .tags Tags: #{project.tags}
