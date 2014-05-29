@@ -38,6 +38,7 @@ class Portfolio {
   static findById(id, fn) {
     id = Mongo.ObjectID(id);
     portfolios.findOne({_id:id}, (e,p)=>{
+      p = _.create(Portfolio.prototype, p);
       fn(p);
     });
   }
@@ -48,16 +49,28 @@ class Portfolio {
     portfolios.save(pjt, ()=>fn());
   }
 
+  update(fields, fn) {
+    this.title = fields.title;
+    this.description = fields.description;
+    this.tags = fields.tags;
+    this.git = fields.git;
+    this.app = fields.app;
+    portfolios.save(this, ()=>fn());
+  }
+
   processPhotos(files) {
     files.photos.forEach((p,i)=>{
       var userId = this.userId.toString();
       var title = this.title.toLowerCase().replace(/[^\w]/g,'');
       var photo = `/img/${userId}/${title}/${i}${path.extname(p.originalFilename)}`;
-      this.photos.push(photo);
+      this.photos.push({filename:photo, isPrimary:false, origFileName:p.originalFilename});
 
       var userDir = `${__dirname}/../static/img/${userId}`;
       var pjtDir  = `${userDir}/${title}`;
       var fullDir = `${pjtDir}/${i}${path.extname(p.originalFilename)}`;
+
+      pjtDir = path.normalize(pjtDir);
+      this.pjtDir = pjtDir;
 
       if(!fs.existsSync(userDir)) {
         fs.mkdirSync(userDir);

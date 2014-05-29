@@ -34,6 +34,18 @@ exports.destroy = (req, res)=>{
   Portfolio.destroyById(req.params.id, ()=>{
     res.redirect('/portfolios');
   });
+};
 
-  // var _id = Mongo.ObjectID(req.params.id);
+exports.edit = (req, res)=>{
+  Portfolio.findById(req.params.id, portfolio=>{
+    res.render('portfolios/edit', {project:portfolio, title: 'Portfolio Edit Project'});
+  });
+};
+
+exports.update = (req, res)=>{
+  Portfolio.findById(req.params.id, portfolio=>{
+    portfolio.update(req.body, ()=>{
+      res.redirect('/portfolios');
+    });
+  });
 };

@@ -8,3 +8,13 @@ block content
     .repo: a(href='#{project.git}') GitHub Repo
     .pjturl: a(href='http://#{project.app}') Project URL
     .tags Tags: #{project.tags}
+
+  .edit-project
+    a(href='/portfolios/#{project._id.toString()}/edit')
+      button Edit
+
+
+  .photos
+    each p in project.photos
+      .thumbnails(style='background-image:url("#{p.filename}")')
+      .ofn= p.origFileName

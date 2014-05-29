@@ -1,0 +1,17 @@
+extends ../shared/template
+
+block content
+  h1 Edit Portfolio Project
+
+  form(action='/portfolios/#{project._id.toString()}/update' method='post')
+    input(type='hidden' name='_method' value='PUT')
+    input(type='text' name='title' placeholder='Title' value='#{project.title}')
+    textarea(name='description' placeholder='Description') #{project.description}
+    input(type='text' name='tags' placeholder='Tech tags' value='#{project.tags}')
+    input(type='text' name='git' placeholder='Git Repo' value='#{project.git}')
+    input(type='text' name='app' placeholder='App URL' value='#{project.app}')
+    button Apply Changes
+
+
+block scripts
+  script(src='/js/es6/compiled/new-project.js')

@@ -33,6 +33,8 @@ function load(app, fn){
   app.get('/portfolios/new', dbg, portfolios.new);
   app.get('/portfolios/:id', dbg, portfolios.show);
   app.delete('/portfolios/:id', dbg, portfolios.destroy);
+  app.get('/portfolios/:id/edit', dbg, portfolios.edit);
+  app.put('/portfolios/:id/update', dbg, portfolios.update);
 
   console.log('Routes Loaded');
   fn();
