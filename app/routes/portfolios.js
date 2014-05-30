@@ -49,3 +49,17 @@ exports.update = (req, res)=>{
     });
   });
 };
+
+exports.removePhoto = (req, res)=>{
+console.log('##################### Ha ########################');
+  Portfolio.findById(req.params.id, (portfolio)=>{
+
+    portfolio.removePhoto(req.params.index, ()=>{
+console.log('AFTER');
+console.log(portfolio.photos);
+      res.render('portfolios/show', {project:portfolio, title: 'Portfolio Show'});
+
+
+    });
+  });
+};

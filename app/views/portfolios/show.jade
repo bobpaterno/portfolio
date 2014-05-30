@@ -10,11 +10,21 @@ block content
     .tags Tags: #{project.tags}
 
   .edit-project
-    a(href='/portfolios/#{project._id.toString()}/edit')
+    a(href='/portfolios/#{project._id}/edit')
       button Edit
 
+  .row.clearfix
+    .col-md-12.column
+      #project-photos(data-id='#{project._id}')
+        each p,i in project.photos
+          .thumbnail-container(data-index='#{i}')
+            .thumbnail-cntls
+              button.btn-add Add
+              button.btn-del Delete
+              button.btn-up &#9650
+              button.btn-dn &#9660
+            .thumbnails(style='background-image:url("#{p.filename}")')
+            .thumbnail-name= p.origFileName
 
-  .photos
-    each p in project.photos
-      .thumbnails(style='background-image:url("#{p.filename}")')
-      .ofn= p.origFileName
+block scripts
+  script(src='/js/es6/compiled/projects.js')

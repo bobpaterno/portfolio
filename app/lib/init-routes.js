@@ -32,9 +32,12 @@ function load(app, fn){
   app.post('/portfolios', dbg, portfolios.create);
   app.get('/portfolios/new', dbg, portfolios.new);
   app.get('/portfolios/:id', dbg, portfolios.show);
-  app.delete('/portfolios/:id', dbg, portfolios.destroy);
+  app.del('/portfolios/:id', dbg, portfolios.destroy);
   app.get('/portfolios/:id/edit', dbg, portfolios.edit);
   app.put('/portfolios/:id/update', dbg, portfolios.update);
+  app.delete('/portfolios/:id/photos/:index', dbg, portfolios.removePhoto);
+
+  // app.delete('/portfolios/photo/:id/:index', dbg, portfolios.fuck);
 
   console.log('Routes Loaded');
   fn();

@@ -49,6 +49,13 @@ class Portfolio {
     portfolios.save(pjt, ()=>fn());
   }
 
+  removePhoto(index, fn) {
+    var localFile = `${__dirname}/../static${this.photos[index].filename}`;
+    this.photos.splice(index,1);
+    fs.unlinkSync(localFile);
+    portfolios.save(this, ()=>fn());
+  }
+
   update(fields, fn) {
     this.title = fields.title;
     this.description = fields.description;
